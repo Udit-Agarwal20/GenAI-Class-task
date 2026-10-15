@@ -1,0 +1,79 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - generic [ref=f1e6]: Proofline AI
+      - generic [ref=f1e12]: Local
+    - button "New Chat" [ref=f1e14] [cursor=pointer]
+    - navigation [ref=f1e17]:
+      - button "Ask Documents" [ref=f1e18] [cursor=pointer]
+      - button "Document Library 0" [ref=f1e23] [cursor=pointer]:
+        - generic [ref=f1e24]: Document Library
+        - generic [ref=f1e28]: "0"
+    - generic [ref=f1e29]: Recent Conversations
+    - generic [ref=f1e31]:
+      - generic [ref=f1e32]: Explain bottom-up thinking in binary...
+      - button "Delete chat" [ref=f1e33] [cursor=pointer]
+    - generic [ref=f1e38]:
+      - generic [ref=f1e39]: Local AI Ready
+      - generic [ref=f1e46]:
+        - generic [ref=f1e47]: gemma4:e2b
+        - generic [ref=f1e51]: 226 chunks
+  - main [ref=f1e56]:
+    - generic [ref=f1e57]:
+      - generic [ref=f1e58]: Explain bottom-up thinking in binary...
+      - generic [ref=f1e63]:
+        - generic "Select active Ollama model" [ref=f1e64]:
+          - combobox [ref=f1e68] [cursor=pointer]:
+            - option "gemma4:e2b (Default)" [selected]
+            - option "gemma4:e4b-it-q4_K_M (Candidate)"
+        - button "New Chat" [ref=f1e69] [cursor=pointer]
+        - button "Library (0)" [ref=f1e72] [cursor=pointer]
+    - generic [ref=f1e77]:
+      - generic [ref=f1e78]:
+        - generic [ref=f1e79]: Explain bottom-up thinking in binary trees and why it is useful.
+        - generic [ref=f1e83]:
+          - generic [ref=f1e84]:
+            - generic [ref=f1e85]: Proofline AI
+            - 'generic "Retrieval: 1608.5ms | TTFT: 14134.8ms | Gen: 17511.9ms" [ref=f1e91]':
+              - generic [ref=f1e94]: "TTFT: 14.13s"
+              - generic [ref=f1e95]: •
+              - generic [ref=f1e96]: 19.1s total
+              - generic [ref=f1e97]: •
+              - generic [ref=f1e98]: 8.7 tok/s
+          - generic [ref=f1e99]:
+            - generic [ref=f1e100]:
+              - paragraph [ref=f1e101]:
+                - text: Bottom-up thinking involves returning information upward instead of recomputing it
+                - button "[S3]" [ref=f1e102] [cursor=pointer]
+                - text: . This means solving the left subtree, solving the right subtree, combining the results, and handing the result to the parent node
+                - button "[S3]" [ref=f1e103] [cursor=pointer]
+                - text: . This is defined as "bottom-up tree DP" and is the postorder position from Part 2 used deliberately
+                - button "[S3]" [ref=f1e104] [cursor=pointer]
+                - text: .
+              - paragraph [ref=f1e105]:
+                - text: The utility of this approach is that it helps avoid O(N²) complexity
+                - button "[S2]" [ref=f1e106] [cursor=pointer]
+                - text: . For example, the naive approach to finding the the height of a subtree involves a full walk, which is inefficient
+                - button "[S3]" [ref=f1e107] [cursor=pointer]
+                - text: . By returning information upward, you can solve problems such as diameter, balanced binary trees, maximum path sum, and largest BST subtree with the same set of operations
+                - button "[S3]" [ref=f1e108] [cursor=pointer]
+                - text: .
+            - button "Retrieved Evidence (3 sources) Expand" [ref=f1e110] [cursor=pointer]:
+              - generic [ref=f1e111]: Retrieved Evidence (3 sources)
+              - generic [ref=f1e116]: Expand
+            - generic [ref=f1e121] [cursor=pointer]:
+              - generic [ref=f1e122]:
+                - generic [ref=f1e126]: Automated Evidence Audit
+                - generic [ref=f1e127]: (2 citations verified)
+              - generic [ref=f1e128]: Inspect audit
+      - generic [ref=f1e133]:
+        - textbox "Ask a follow-up question..." [ref=f1e134]
+        - generic [ref=f1e135]:
+          - generic [ref=f1e136]:
+            - button "Attach PDF" [ref=f1e137] [cursor=pointer]
+            - generic [ref=f1e141]: 0 PDFs Indexed
+            - 'generic "Answer Depth Mode (Brief: 512, Standard: 1024, Detailed: 1536 tokens)" [ref=f1e146]':
+              - button "Brief" [ref=f1e147] [cursor=pointer]
+              - button "Standard" [ref=f1e148] [cursor=pointer]
+              - button "Detailed" [ref=f1e149] [cursor=pointer]
+          - button "Send question (Enter)" [disabled] [ref=f1e150]

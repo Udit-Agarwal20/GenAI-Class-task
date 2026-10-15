@@ -1,0 +1,48 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Proofline AI
+      - generic [ref=e12]: Local
+    - button "New Chat" [ref=e14] [cursor=pointer]
+    - navigation [ref=e17]:
+      - button "Ask Documents" [ref=e18] [cursor=pointer]
+      - button "Document Library 0" [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: Document Library
+        - generic [ref=e28]: "0"
+    - generic [ref=e29]: Recent Conversations
+    - generic [ref=e30]: No past conversations
+    - generic [ref=e33]:
+      - generic [ref=e34]: Local AI Ready
+      - generic [ref=e41]:
+        - generic [ref=e42]: gemma4:e2b
+        - generic [ref=e46]: 226 chunks
+  - main [ref=e51]:
+    - generic [ref=e52]:
+      - generic [ref=e53]: Ask Documents
+      - button "Library (0)" [ref=e59] [cursor=pointer]
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - heading "What do your documents say?" [level=1] [ref=e66]
+        - paragraph [ref=e67]: Ask questions, connect ideas, and verify answers against your own documents.
+      - generic [ref=e68]:
+        - textbox "Ask me anything about your documents..." [ref=e69]
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - button "Attach PDF" [ref=e72] [cursor=pointer]
+            - generic [ref=e76]: 0 PDFs Indexed
+          - button "Send question (Enter)" [disabled] [ref=e81]
+      - generic [ref=e84]:
+        - generic [ref=e85]: "Get started with a use case:"
+        - generic [ref=e86]:
+          - generic [ref=e92] [cursor=pointer]:
+            - generic [ref=e93]: Explain a concept
+            - generic [ref=e94]: Bottom-up thinking in binary trees and why it is useful.
+          - generic [ref=e100] [cursor=pointer]:
+            - generic [ref=e101]: Summarize a document
+            - generic [ref=e102]: Key fundamentals, properties, and tree structures.
+          - generic [ref=e110] [cursor=pointer]:
+            - generic [ref=e111]: Compare information
+            - generic [ref=e112]: DFS recursive traversals vs BFS level-order techniques.
+          - generic [ref=e118] [cursor=pointer]:
+            - generic [ref=e119]: Find conflicting evidence
+            - generic [ref=e120]: When is Morris traversal preferred over iterative BFS?

@@ -1,0 +1,389 @@
+{
+  "model": "gemma4:e2b",
+  "timestamp": "2026-10-16 02:58:04",
+  "server_config": {
+    "status": "ok",
+    "service": "Proofline AI",
+    "model": "gemma4:e2b",
+    "available_models": [
+      "gemma4:e2b",
+      "gemma4:e4b-it-q4_K_M"
+    ],
+    "depth_modes": [
+      "brief",
+      "standard",
+      "detailed"
+    ],
+    "hybrid_retrieval": true,
+    "bm25_chunks": 226,
+    "embedding_model": "nomic-embed-text",
+    "collection": "proofline_docs",
+    "database_path": "qdrant_langchain_storage",
+    "indexed_chunks": 226,
+    "documents_count": 16,
+    "qdrant_status": "green",
+    "is_warm": true,
+    "top_k": 5,
+    "num_ctx": 8192,
+    "num_predict_standard": 1024,
+    "num_predict_detailed": 1536,
+    "num_predict_brief": 768,
+    "local_only": true
+  },
+  "depth_mode_scaling": {
+    "brief": {
+      "tokens": 162,
+      "chars": 790,
+      "ttft_sec": 21.055,
+      "total_sec": 24.913,
+      "tps": 6.8,
+      "citations": [
+        "[S2]"
+      ],
+      "answer_preview": "Bottom-up thinking is a pattern where information is returned upward instead of being recomputed [S2]. The core idea is to solve the subproblems by solving the left subtree and the"
+    },
+    "standard": {
+      "tokens": 412,
+      "chars": 1973,
+      "ttft_sec": 18.273,
+      "total_sec": 28.209,
+      "tps": 14.9,
+      "citations": [
+        "[S2]"
+      ],
+      "answer_preview": "Bottom-up thinking is a pattern used in tree problems where information is calculated from the leaves up to the root, rather than calculating results from the root down. The core p"
+    },
+    "detailed": {
+      "tokens": 834,
+      "chars": 3951,
+      "ttft_sec": 17.2,
+      "total_sec": 37.361,
+      "tps": 22.4,
+      "citations": [
+        "[S1]",
+        "[S2]",
+        "[S3]",
+        "[S4]"
+      ],
+      "answer_preview": "Bottom-up thinking is a paradigm for solving tree-related problems that focuses on returning calculated information from subproblems to their parent nodes rather than recomputing v"
+    }
+  },
+  "evaluation_questions": [
+    {
+      "question": "Explain bottom-up thinking and why it avoids repeated computation.",
+      "depth_mode": "detailed",
+      "model": "gemma4:e2b",
+      "sources_count": 5,
+      "sources": [
+        {
+          "label": "S1",
+          "filename": "14-Practice-Problems.pdf",
+          "page": 2,
+          "excerpt": "bottom-up with a sentinel. Think: what is the cost of the naive version, and what single value can\ncarry both height and failure?\n• Diameter of Binary Tree (Easy). https://leetcode.com/problems/diameter-of-binary-tree/\nPattern: bottom-up, record versus return. Think: which expression is recorded and which is\nreturned?\n• Merge Two Binary Trees (Easy). https://leetcode.com/problems/merge-two-binary-trees/\nPattern: two-tree recursion. Think: what should happen when one of the two nodes is NULL?\n• Binary Tree Paths (Easy). https://leetcode.com/problems/binary-tree-paths/ Pattern: backtrack-\ning. Think: what must be undone when leaving a node?\n• Average of Levels in Binary Tree (Easy). https://leetcode.com/problems/average-of-levels-in-\nbinary-tree/ Pattern: BFS template. Think: which type do you accumulate in, and why not int?\nLevel 3: Easy plus\nEach of these needs two ideas at once, or an idea used slightly out of its comfort zone."
+        },
+        {
+          "label": "S2",
+          "filename": "06-Bottom-Up-Thinking.pdf",
+          "page": 1,
+          "excerpt": "Part 6: Bottom-Up Thinking\nReturning information upward instead of recomputing it\nThe idea in one line\nSolve the left subtree, solve the right subtree, combine, and hand the result to your parent.\nThat is all “bottom-up tree DP” means. It is the postorder position from Part 2 used deliberately . Once\nyou can design what to return, you can solve diameter, balanced tree, maximum path sum, largest\nBST subtree, and most Medium tree problems with the same six lines.\nsolve(node)\nL = solve(node.left)\nR = solve(node.right)\ncombine L, R and node\nreturn the result upward\nWhere the naive approach goes wrong\nHere is a concrete, honest example. Suppose we want, for every node, the height of the subtree\nrooted at that node. The direct approach:\nint height(TreeNode* root) {\nif (root == NULL) return 0;\nreturn 1 + max(height(root->left), height(root->right));\n}\nvoid printAllHeights(TreeNode* root) {\nif (root == NULL) return;\ncout << root->val << \" has height \" << height(root) << \"\\n\"; // full walk"
+        },
+        {
+          "label": "S3",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 5,
+          "excerpt": "corrupted structure.\n• It cannot run on a const tree. You need write access even though you are only reading.\n• It is harder to debug. A single wrong condition creates an infinite loop rather than a wrong\nanswer.\n• The constant factor is worse than plain recursion because of the predecessor searches.\nSo when is it actually worth it? When the tree is huge and deep enough that O(H) stack space\ngenuinely matters, or when the interviewer asks for O(1) space inorder. In ordinary contest and\ninterview coding, use recursion.\nWhat you are expected to know\nYou do not need to reproduce Morris traversal from memory under time pressure. You should be able\nto:\n1. Explain why normal traversal needs a stack, in one sentence: there is no way back up.\n2. Explain the fix: thread the inorder predecessor’s empty right pointer to the current node.\n3. Explain how the code knows whether it is arriving for the first or second time.\n4. State the complexities and why time is still O(N)."
+        },
+        {
+          "label": "S4",
+          "filename": "04-Iterative-Traversals.pdf",
+          "page": 5,
+          "excerpt": "traversal question and not fine if you wanted to free memory or compute values on the fly . In practice,\nwhen you actually need bottom-up computation, you use recursion, so this is rarely a problem.\nMethod 2, two stacks\nThe same idea written more explicitly . Push into a second stack instead of reversing at the end.\nvector<int> postorderTwoStacks(TreeNode* root) {\nvector<int> out;\nif (root == NULL) return out;\nstack<TreeNode*> s1, s2;\ns1.push(root);\nwhile (!s1.empty()) {\nTreeNode* node = s1.top(); s1.pop();\ns2.push(node);\nif (node->left) s1.push(node->left);\nif (node->right) s1.push(node->right);"
+        },
+        {
+          "label": "S5",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 5,
+          "excerpt": "3. Explain how the code knows whether it is arriving for the first or second time.\n4. State the complexities and why time is still O(N).\n5. Write the standard implementation with a little thought, having understood it.\nCommon mistakes\n• Omitting pred->right != curr in the predecessor search. Infinite loop along an existing\nthread.\n• Forgetting to remove the thread. You return the right answer and leave a cycle in the tree, which\nbreaks everything afterwards.\n• Recording the node in the wrong branch. First branch gives preorder, second gives inorder.\nChoose deliberately ."
+        }
+      ],
+      "tokens_streamed": 827,
+      "char_count": 3762,
+      "ttft_sec": 15.015,
+      "total_sec": 36.509,
+      "server_metrics": {
+        "retrieval_ms": 60.6,
+        "ttft_ms": 14941.9,
+        "generation_ms": 36435.6,
+        "total_ms": 36498.5,
+        "token_count": 827,
+        "tokens_per_sec": 22.7
+      },
+      "used_labels": [
+        "S2"
+      ],
+      "invalid_labels": [],
+      "citations_found": [
+        "[S2]"
+      ],
+      "answer": "Bottom-up thinking is a paradigm for solving tree problems by solving subproblems from the leaves up to the root, focusing on returning calculated information to the parent node rather than recomputing values [S2].\n\n### Direct Answer\nBottom-up thinking avoids repeated computation by solving the problem at the lowest level (the leaves) and passing the necessary results upward to the parent nodes, allowing the parent to combine these results to solve the problem for its own subtree. This approach ensures that each piece of information is calculated only once, eliminating the need for redundant recursive calls [S2].\n\n### Core Concepts\n**Returning Information Upward:**\nThe fundamental idea of bottom-up tree dynamic programming (DP) is to solve the left subtree, solve the right subtree, combine the results, and then hand the result to the parent [S2]. This is defined as the postorder position from Part 2 [S2].\n\n**The Failure of the Naive Approach:**\nThe naive approach involves direct computation, such as calculating the height of a subtree by recursively calling the function on the left and right children [S2]. For example, calculating the height directly requires a full walk where the function repeatedly calls itself on subtrees [S2]. This approach is inefficient because it necessitates recomputing values [S2].\n\n**The Power of Bottom-Up:**\nOnce the mechanism for returning information is designed, it allows for solving a wide range of complex tree problems—such as diameter, balanced tree, maximum path sum, largest BST subtree, and most Medium tree problems—using a consistent set of six lines of logic [S2]. The core logic is:\n1. Solve the left subtree (L).\n2. Solve the right subtree (R).\n3. Combine L, R, and the current node.\n4. Return the result upward [S2].\n\n### Step-by-Step Breakdown: Mechanism\nThe process of bottom-up thinking involves the following sequential steps:\n\n1. **Solve Subtrees:** The process begins by solving the subproblems for the left and right children [S2].\n2. **Combine Results:** The results obtained from the left and right subtrees are combined with the information from the current node [S2].\n3. **Return Upward:** The calculated result is then passed up to the parent node [S2].\n\n**Example of Naive vs. Bottom-Up:**\nConsider calculating the the height of a subtree.\n*   **Naive Approach:** A function is defined that checks if the node is NULL, and if not, returns $1 + \\max(\\text{height}(\\text{left}), \\text{height}(\\text{right}))$ [S2]. This approach involves a \"full walk\" [S2].\n*   **Bottom-Up Approach:** The function `solve(node)` is designed to return a value that summarizes the subtree's properties. The parent node uses this returned value to determine its own property, avoiding the need for repeated calculation [S2].\n\n### Trade-offs & Limitations\n**Efficiency Gain:**\nThe primary advantage of bottom-up thinking is that it solves problems by \"returning information upward instead of recomputing it\" [S2]. This mechanism inherently avoids the repeated computation that plagues the naive approach [S2].\n\n**Applicability:**\nThis pattern is applicable to many tree problems, including diameter, balanced tree, maximum path sum, largest BST subtree, and most Medium tree problems [S2].\n\n**Prerequisites:**\nThe success of this method depends on the ability to \"design what to return\" [S2]. If a problem can be framed in terms of what information is needed from the children to solve the parent, this method is effective [S2].\n\n### Key Takeaway\nThe rule of thumb for bottom-up thinking is: **Solve the subproblems first, and pass the solution up to the parent.** This strategy ensures that information is calculated once and reused, which is the mechanism by which repeated computation is avoided [S2].",
+      "id": "Q1_bottom_up",
+      "category": "Core Conceptual Depth"
+    },
+    {
+      "question": "Compare recursive and iterative traversals, including their trade-offs.",
+      "depth_mode": "standard",
+      "model": "gemma4:e2b",
+      "sources_count": 5,
+      "sources": [
+        {
+          "label": "S1",
+          "filename": "04-Iterative-Traversals.pdf",
+          "page": 7,
+          "excerpt": "4. Explain the loop condition curr != NULL || !st.empty() in one sentence.\n5. Why does reversing a “root, right, left” traversal produce postorder?\n6. In method 3, what question is lastVisited != node->right really answering?\n7. Is iterative traversal faster than recursive traversal? Justify your answer with complexities."
+        },
+        {
+          "label": "S2",
+          "filename": "04-Iterative-Traversals.pdf",
+          "page": 1,
+          "excerpt": "Part 4: Iterative Traversals\nReplacing the call stack with your own stack\nWhy bother\nRecursion already works and is shorter. So why learn the iterative versions?\n1. Interviewers ask for it. “Now do it without recursion” is a standard follow-up.\n2. Deep trees overflow the call stack. A skewed tree with 10ˆ5 nodes means 10ˆ5 pending calls.\nYour own stack lives on the heap and does not have that limit.\n3. You get control. Pausing a traversal, resuming it later, or implementing a BST iterator (LeetCode\n173) is easy with an explicit stack and impossible with plain recursion.\n4. It teaches you what recursion actually does. After this part, Morris traversal in Part 12 will look\nlike a natural next step instead of black magic.\nWhat the call stack actually stores\nWhen preorder(2) calls preorder(4), the machine has to remember two things about the paused\ncall:\n• which node it was working on (node 2)\n• where to resume (it already finished the left call, so next is the right call)"
+        },
+        {
+          "label": "S3",
+          "filename": "04-Iterative-Traversals.pdf",
+          "page": 7,
+          "excerpt": "Binary Trees and Tree Data Structures 7\nTraversal Iterative idea Extra state Difficulty\nPreorder pop, record, push right then left none easy\nInorder dive left pushing, pop, record, go right none medium\nPostorder (method 1) root right left, then reverse none easy\nPostorder (method 3) dive left, check if right is done lastVisited hard\nAll of them are O(N) time and O(H) space, exactly like the recursive versions. The iterative form does\nnot make anything faster. It only moves the memory from the call stack to the heap and gives you\ncontrol.\nCommon mistakes\n• Pushing left before right in iterative preorder. You get root, right, left. Correct for the postorder\ntrick, wrong for preorder.\n• Using while (!st.empty()) alone in iterative inorder. The stack is empty at the start and can\nbe empty in the middle while work remains. You need the curr != NULL half too.\n• Pushing NULL onto the stack. Guard every push with if (node->left) .\n• Reading st.top() after st.pop(). Read first, pop second."
+        },
+        {
+          "label": "S4",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 5,
+          "excerpt": "corrupted structure.\n• It cannot run on a const tree. You need write access even though you are only reading.\n• It is harder to debug. A single wrong condition creates an infinite loop rather than a wrong\nanswer.\n• The constant factor is worse than plain recursion because of the predecessor searches.\nSo when is it actually worth it? When the tree is huge and deep enough that O(H) stack space\ngenuinely matters, or when the interviewer asks for O(1) space inorder. In ordinary contest and\ninterview coding, use recursion.\nWhat you are expected to know\nYou do not need to reproduce Morris traversal from memory under time pressure. You should be able\nto:\n1. Explain why normal traversal needs a stack, in one sentence: there is no way back up.\n2. Explain the fix: thread the inorder predecessor’s empty right pointer to the current node.\n3. Explain how the code knows whether it is arriving for the first or second time.\n4. State the complexities and why time is still O(N)."
+        },
+        {
+          "label": "S5",
+          "filename": "01-Tree-Fundamentals.pdf",
+          "page": 3,
+          "excerpt": "“Distinguishable” is not a detail. These two trees are different trees:\n1 1\n/ \\\n2 2\nThe first has 2 as a left child, the second as a right child. Their inorder traversals differ, their views\ndiffer, and a function like “is this tree symmetric” will give different answers.\nAlmost every interview and contest tree problem is about binary trees, which is why we spend the\nwhole course on them.\nSpecial shapes of binary trees\nYou need these names to read problem statements. You do not need formal proofs.\nFull binary tree: every node has either 0 or 2 children. No node has exactly one child."
+        }
+      ],
+      "tokens_streamed": 234,
+      "char_count": 1208,
+      "ttft_sec": 22.928,
+      "total_sec": 28.864,
+      "server_metrics": {
+        "retrieval_ms": 64.0,
+        "ttft_ms": 22854.2,
+        "generation_ms": 28788.2,
+        "total_ms": 28854.3,
+        "token_count": 234,
+        "tokens_per_sec": 8.1
+      },
+      "used_labels": [
+        "S2",
+        "S3"
+      ],
+      "invalid_labels": [],
+      "citations_found": [
+        "[S2]",
+        "[S3]"
+      ],
+      "answer": "The comparison between recursive and iterative traversals centers on the trade-off between control and resource management, as iterative methods primarily serve to move memory usage from the call stack to the heap [S3].\n\n### Direct Answer\nIterative traversals are generally not faster than recursive traversals in terms of asymptotic time complexity, as both methods maintain $O(N)$ time complexity [S3]. However, iterative traversals offer significant advantages in terms of control, allowing developers to manage memory explicitly, handle deep trees that would otherwise overflow the call stack, and implement features like pausing a traversal or creating BST iterators [S2].\n\n### Core Concepts\n\n**Recursive Traversal:**\nRecursion is often considered shorter and works naturally [S2]. However, its primary limitation is that deep trees can cause the call stack to overflow, as the call stack has a finite limit [S2].\n\n**Iterative Traversal:**\nThe fundamental idea behind iterative traversal is replacing the call stack with a user-managed stack that resides on the heap [S2]. This allows the developer to gain explicit control over the traversal process, enabling pausing, resuming, or implementing complex",
+      "id": "Q2_traversals_comparison",
+      "category": "Comparative Analysis & Trade-offs"
+    },
+    {
+      "question": "Explain how to solve the diameter of a binary tree, with a C++ example.",
+      "depth_mode": "detailed",
+      "model": "gemma4:e2b",
+      "sources_count": 5,
+      "sources": [
+        {
+          "label": "S1",
+          "filename": "07-Diameter.pdf",
+          "page": 1,
+          "excerpt": "Part 7: Diameter of a Binary Tree\nThe classic bottom-up problem\nWhat diameter means\nThe diameter of a binary tree is the length of the longest path between any two nodes in the tree.\nTwo things people miss on first reading:\n1. The path does not have to pass through the root.\n2. The path does not have to start or end at a leaf, although in practice the longest one always does.\nLeetCode 543 measures the length in edges. So a single node has diameter 0, and two nodes joined\nby one edge have diameter 1. We will use edges throughout. If a problem asks for the number of\nnodes on the path instead, the answer is simply edges + 1.\nOn our tree:\n1\n/ \\\n2 3\n/ \\ \\\n4 5 6\nThe longest path is 4 to 2 to 1 to 3 to 6, which uses 4 edges. So the diameter is 4. Another candidate\nis 4 to 2 to 5, which uses only 2 edges.\nHeight is not diameter\nThese get confused constantly .\n• Height measures a path that goes straight down from one node. It never turns."
+        },
+        {
+          "label": "S2",
+          "filename": "00-Index-and-How-To-Use.pdf",
+          "page": 1,
+          "excerpt": "Binary Trees and Tree Data Structures\nCourse index and how to use this material\nWho this is for\nSomeone who has never studied trees. You should be comfortable with C++ basics: functions,\npointers at a beginner level, vector, queue, stack, and simple recursion such as factorial. Nothing\nelse is assumed. Recursion is reintroduced from scratch in Part 1 where it is needed.\nWhat you will be able to do at the end\nOpen any LeetCode Easy tree problem and solve it in ten minutes. Open a typical Medium tree\nproblem and know within a minute which of five patterns it belongs to, then implement it. More\nimportantly , look at a problem you have never seen and ask the right questions:\nWhat information does each subtree need to return?\nIs this DFS, BFS, or bottom-up?\nWhat should my base case be?\nWhat do I combine from the left and the right?\nMemorising twenty solutions is not the goal, and does not work. Recognising five patterns does.\nThe parts\nPart Topic What it gives you"
+        },
+        {
+          "label": "S3",
+          "filename": "06-Bottom-Up-Thinking.pdf",
+          "page": 1,
+          "excerpt": "Part 6: Bottom-Up Thinking\nReturning information upward instead of recomputing it\nThe idea in one line\nSolve the left subtree, solve the right subtree, combine, and hand the result to your parent.\nThat is all “bottom-up tree DP” means. It is the postorder position from Part 2 used deliberately . Once\nyou can design what to return, you can solve diameter, balanced tree, maximum path sum, largest\nBST subtree, and most Medium tree problems with the same six lines.\nsolve(node)\nL = solve(node.left)\nR = solve(node.right)\ncombine L, R and node\nreturn the result upward\nWhere the naive approach goes wrong\nHere is a concrete, honest example. Suppose we want, for every node, the height of the subtree\nrooted at that node. The direct approach:\nint height(TreeNode* root) {\nif (root == NULL) return 0;\nreturn 1 + max(height(root->left), height(root->right));\n}\nvoid printAllHeights(TreeNode* root) {\nif (root == NULL) return;\ncout << root->val << \" has height \" << height(root) << \"\\n\"; // full walk"
+        },
+        {
+          "label": "S4",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 5,
+          "excerpt": "3. Explain how the code knows whether it is arriving for the first or second time.\n4. State the complexities and why time is still O(N).\n5. Write the standard implementation with a little thought, having understood it.\nCommon mistakes\n• Omitting pred->right != curr in the predecessor search. Infinite loop along an existing\nthread.\n• Forgetting to remove the thread. You return the right answer and leave a cycle in the tree, which\nbreaks everything afterwards.\n• Recording the node in the wrong branch. First branch gives preorder, second gives inorder.\nChoose deliberately ."
+        },
+        {
+          "label": "S5",
+          "filename": "06-Bottom-Up-Thinking.pdf",
+          "page": 3,
+          "excerpt": "Binary Trees and Tree Data Structures 3\nNotice a recurring split in the last few rows. There are two different quantities:\n• the answer through me, which may involve both of my children, and\n• the value I can give my parent , which can only continue through one child, because a path\ncannot go down the left, come back, and go down the right.\nDiameter and maximum path sum are the classic examples, and confusing these two is the number\none error in this whole topic. We deal with it properly in Part 7.\nTwo ways to carry extra information\nWay 1: return a small struct\nClean, explicit, and easy to explain in an interview.\nstruct Info {\nint height;\nint count;\n};\nInfo solve(TreeNode* root) {\nif (root == NULL) return {0, 0};\nInfo L = solve(root->left);\nInfo R = solve(root->right);\nInfo me;\nme.height = 1 + max(L.height, R.height);\nme.count = 1 + L.count + R.count;\nreturn me;\n}\nUse this when two or more values genuinely need to travel upward together."
+        }
+      ],
+      "tokens_streamed": 707,
+      "char_count": 3197,
+      "ttft_sec": 26.212,
+      "total_sec": 43.608,
+      "server_metrics": {
+        "retrieval_ms": 117.3,
+        "ttft_ms": 26067.2,
+        "generation_ms": 43476.0,
+        "total_ms": 43595.0,
+        "token_count": 707,
+        "tokens_per_sec": 16.3
+      },
+      "used_labels": [
+        "S1",
+        "S3",
+        "S5"
+      ],
+      "invalid_labels": [],
+      "citations_found": [
+        "[S1]",
+        "[S3]",
+        "[S5]"
+      ],
+      "answer": "The diameter of a binary tree is defined as the length of the longest path between any two nodes in the tree [S1]. The length is measured in edges, meaning a single node has a diameter of 0, and two nodes joined by one edge have a diameter of 1 [S1]. It is crucial to understand that the longest path does not necessarily have to pass through the root, although in practice, the longest path always involves leaves [S1].\n\n### Core Concepts\n\n**Diameter vs. Height:**\nIt is essential to distinguish the diameter from the height of a tree [S1].\n*   **Height:** Measures the length of a path that goes straight down from one node; it never turns [S1].\n*   **Diameter:** Measures the longest possible path between any two nodes [S1].\n\n**Bottom-Up Thinking:**\nThe most effective strategy for solving problems like diameter is the \"bottom-up tree DP\" approach [S3]. This involves solving the subproblems recursively: solve the left subtree, solve the right subtree, combine the results, and then pass the combined result upward to the parent node [S3].\n\nThe core idea is to return information upward instead of recomputing it [S3]. This technique is applicable to finding various metrics, including diameter and maximum path sum [S3].\n\n**Carrying Information Upward:**\nWhen solving tree problems, there are two types of information that need to be carried upward:\n1.  **The answer through me:** This involves both of the node's children [S5].\n2.  **The value I can give my parent:** This can only continue through one child, because a path cannot go down one branch, come back, and then go down another [S5].\n\nWhen two or more values genuinely need to travel upward together, such as for calculating diameter, returning a structure (like a `struct`) is a clean, explicit, and easy-to-explain method [S5].\n\n### Step-by-Step Breakdown: Solving the Diameter\n\nThe process involves a recursive function that processes each node to calculate the necessary information for its parent, ultimately determining the maximum path length within the subtree rooted at that node [S3].\n\n**1. Define the Information to Return:**\nTo calculate the diameter, the function must determine what information is needed by the parent node. This information must include metrics that allow the parent to calculate the longest path passing through the current node [S5].\n\n**2. Recursive Calculation (Bottom-Up):**\nFor any given node, the algorithm performs the following steps:\n*   Solve the left subtree to obtain its required information (e.g., `L`).\n*   Solve the right subtree to obtain its required information (e.g., `R`) [S3].\n*   Combine the results (`L`, `R`, and the current node) to calculate the result that will be passed up to the parent [S3].\n\n**3. Calculating the Diameter at the Current Node:**\nThe diameter of the current node is determined by considering the longest path that passes through it, which involves combining the maximum path information from the left and right subtrees [S1].\n\n**4. Returning the Result:**\nThe function returns the calculated information to its parent, allowing the process to propagate up the tree [S3].\n\n### C++ Implementation Pattern\n\nThe implementation pattern involves defining a",
+      "id": "Q3_diameter_cpp",
+      "category": "Algorithmic Process & Code Implementation"
+    },
+    {
+      "question": "What is the difference between Morris Inorder Traversal and Morris Preorder Traversal, and how do threaded binary trees restore modified pointers?",
+      "depth_mode": "standard",
+      "model": "gemma4:e2b",
+      "sources_count": 5,
+      "sources": [
+        {
+          "label": "S1",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 1,
+          "excerpt": "Part 12: Morris Traversal\nInorder in O(1) extra space\nRead this part only after iterative inorder (Part 4) feels comfortable. Morris traversal is the one\nadvanced item in this course. You do not need it for most problems, but it is a favourite interview\nquestion and it teaches something real about what a stack is for.\nThe question it answers\nBoth inorder implementations we know use O(H) extra memory:\n• recursion uses the call stack\n• the iterative version uses an explicit stack<TreeNode*>\nWhy is that memory needed at all? Because of one specific moment. You are at node 1, you dive into\nthe left subtree, and when the left subtree finishes you have to get back to node 1. Nothing inside\nthe left subtree points upward. Without a stack, once you go down you cannot come back.\n1\n/ \\\n2 3 from node 4, how do you return to 2?\n/ \\ \\ from node 5, how do you return to 1?\n4 5 6 there are no parent pointers"
+        },
+        {
+          "label": "S2",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 6,
+          "excerpt": "Binary Trees and Tree Data Structures 6\n• Moving curr to curr->left in the unthreading branch. After unthreading, the left subtree is\nfinished. Go right.\n• Claiming the time is O(N log N) because of the inner loop. Use the edge counting argument.\n• Using Morris just to look clever on a problem where recursion is clearer.\nCheck yourself\n1. What exact problem does the thread solve?\n2. Which node do we thread from, and why is its right pointer guaranteed to be free?\n3. How does the algorithm distinguish a first arrival from a second arrival at the same node?\n4. Why is the time complexity O(N) despite the inner search loop?\n5. Which single line moves to convert Morris inorder into Morris preorder?\n6. Name two situations where Morris traversal would be a bad choice."
+        },
+        {
+          "label": "S3",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 1,
+          "excerpt": "1\n/ \\\n2 3 from node 4, how do you return to 2?\n/ \\ \\ from node 5, how do you return to 1?\n4 5 6 there are no parent pointers\nMorris traversal’s answer: build the return path into the tree itself, temporarily, and remove it\nafterwards.\nThe key observation\nTake node 1. The last node visited in its left subtree, in inorder, is node 5. In general, the last node\nof a left subtree in inorder is its rightmost node, reached by going left once and then right as far as\npossible. That node is called the inorder predecessor of node 1.\n1\n/\n2\n/ \\\n4 5 <- 5 is the rightmost node of 1 's left subtree\n1"
+        },
+        {
+          "label": "S4",
+          "filename": "12-Morris-Traversal.pdf",
+          "page": 4,
+          "excerpt": "larger than plain recursion, same asymptotic class.\nMorris preorder\nPreorder needs the node recorded on the first arrival instead of the second. So move the push_back\ninto the branch that creates the thread:\nvector<int> morrisPreorder(TreeNode* root) {\nvector<int> out;\nTreeNode* curr = root;\nwhile (curr != NULL) {\nif (curr->left == NULL) {\nout.push_back(curr->val);\ncurr = curr->right;\n} else {\nTreeNode* pred = curr->left;\nwhile (pred->right != NULL && pred->right != curr)\npred = pred->right;\nif (pred->right == NULL) {\nout.push_back(curr->val); // record on the FIRST visit\npred->right = curr;\ncurr = curr->left;\n} else {\npred->right = NULL;\ncurr = curr->right;\n}\n}\n}"
+        },
+        {
+          "label": "S5",
+          "filename": "02-DFS-Recursive-Traversals.pdf",
+          "page": 2,
+          "excerpt": "Binary Trees and Tree Data Structures 2\nDuring that walk you touch every node exactly three times:\n1. when you arrive at it from above (going down into it)\n2. when you come back up from its left subtree\n3. when you come back up from its right subtree, just before leaving it for good\nNow the three traversals are simply three choices of which touch counts:\nTraversal Record the node on which touch\nPreorder 1st touch, on the way down\nInorder 2nd touch, between left and right\nPostorder 3rd touch, on the way out\nThe results for our tree:\nPreorder : 1 2 4 5 3 6\nInorder : 4 2 5 1 3 6\nPostorder : 4 5 2 6 3 1\nCheck those three lines against the picture until they feel obvious. Once this single picture is solid,\niterative traversal and Morris traversal later become much less mysterious, because they are just\ndifferent ways of remembering “which touch am I on”.\nPreorder traversal\nMeaning\nProcess the node, then everything on its left, then everything on its right. Root comes before its"
+        }
+      ],
+      "tokens_streamed": 240,
+      "char_count": 1204,
+      "ttft_sec": 23.26,
+      "total_sec": 29.151,
+      "server_metrics": {
+        "retrieval_ms": 424.2,
+        "ttft_ms": 22821.2,
+        "generation_ms": 28711.3,
+        "total_ms": 29137.1,
+        "token_count": 240,
+        "tokens_per_sec": 8.4
+      },
+      "used_labels": [
+        "S3",
+        "S4"
+      ],
+      "invalid_labels": [],
+      "citations_found": [
+        "[S3]",
+        "[S4]"
+      ],
+      "answer": "The difference between Morris Inorder Traversal and Morris Preorder Traversal lies in which node is recorded during the traversal process, and how the threading mechanism is applied to achieve the desired order. Threaded binary trees restore modified pointers by temporarily building a return path into the tree structure, which is then removed afterward [S3].\n\n### Difference Between Morris Inorder and Morris Preorder Traversal\n\n**Morris Inorder Traversal:**\nIn Inorder traversal, the algorithm identifies the inorder predecessor of a node. The inorder predecessor is defined as the last node visited in the left subtree, which is the rightmost node reached by going left once and then right as far as possible [S3]. The traversal logic ensures that the last node of a left subtree is identified to facilitate the return path [S3].\n\n**Morris Preorder Traversal:**\nIn Preorder traversal, the algorithm records the node on the first arrival [S4]. The mechanism for Preorder is implemented by moving the push\\_back operation into the branch that creates the thread [S4].\n\n**Traversal Mechanics Comparison:**\nThe three standard traversals are defined by which touch counts: Preorder records the node on the",
+      "id": "Q4_multi_pdf",
+      "category": "Multi-Document Synthesis"
+    },
+    {
+      "question": "Explain how Dijkstra's algorithm finds the shortest path in a weighted graph.",
+      "depth_mode": "brief",
+      "model": "gemma4:e2b",
+      "sources_count": 5,
+      "sources": [
+        {
+          "label": "S1",
+          "filename": "05-Tree-Properties.pdf",
+          "page": 2,
+          "excerpt": "Time O(N), space O(H).\nMinimum depth\nLeetCode 111. The number of nodes on the shortest path from the root down to a leaf.\nThe obvious answer is wrong:\n// WRONG\nint minDepth(TreeNode* root) {\nif (root == NULL) return 0;\nreturn 1 + min(minDepth(root->left), minDepth(root->right));\n}\nTry it on\n1\n\\\n2\n\\\n3\nThe left subtree of 1 is empty and returns 0, so the answer comes out as 1. But node 1 is not a leaf.\nThe true answer is 3.\nThe problem is that “empty subtree” and “path ends here” are different things. A missing child does\nnot create a leaf."
+        },
+        {
+          "label": "S2",
+          "filename": "07-Diameter.pdf",
+          "page": 2,
+          "excerpt": "Every path is counted exactly once, at its own turning point. Nothing is missed and nothing is double\ncounted.\nBrute force, and why it is slow\nTranslate the formula directly:\nint height(TreeNode* root) {\nif (root == NULL) return 0;\nreturn 1 + max(height(root->left), height(root->right));\n}\nint diameterBrute(TreeNode* root) {\nif (root == NULL) return 0;\nint through = height(root->left) + height(root->right); // path turning here\nint left = diameterBrute(root->left); // best path entirely on the left\nint right = diameterBrute(root->right); // best path entirely on the right\nreturn max(through, max(left, right));\n}\nThis is correct. It is also wasteful. At every node we call height, which walks the entire subtree below\nthat node. We computed those heights already inside the outer recursion and threw them away .\nCost on a skewed tree:\nnode 1: height walk over N nodes"
+        },
+        {
+          "label": "S3",
+          "filename": "05-Tree-Properties.pdf",
+          "page": 7,
+          "excerpt": "the template?\n4. What is the correct base value for a function that finds the minimum value in a tree?\n5. Explain in one sentence why isSymmetric needs a two argument helper.\n6. Search in a general binary tree is O(N) but in a BST it is O(H). What extra promise buys you that?\n7. For a function that returns true only if every node value is even, what should the NULL case\nreturn?"
+        },
+        {
+          "label": "S4",
+          "filename": "05-Tree-Properties.pdf",
+          "page": 7,
+          "excerpt": "Binary Trees and Tree Data Structures 7\n• Using isSameTree for symmetry .Mirror is not the same as equal.\n• Recomputing. Calling maxDepth(root->left) twice in one function doubles the work for no\nreason. Store it in a variable.\n• Global variables left dirty between test cases. If you use a member variable such as int best ,\nreset it at the start of the public function. On LeetCode the same object is reused across test cases\nand this causes bugs that only show up on the second case.\nCheck yourself\n1. What should a height function return for NULL if you are counting edges, and why?\n2. Why is the naive minimum depth solution wrong, and which tree exposes it?\n3. countNodes and sumOfNodes differ by one token. Which one, and what does that tell you about\nthe template?\n4. What is the correct base value for a function that finds the minimum value in a tree?\n5. Explain in one sentence why isSymmetric needs a two argument helper."
+        },
+        {
+          "label": "S5",
+          "filename": "07-Diameter.pdf",
+          "page": 2,
+          "excerpt": "Binary Trees and Tree Data Structures 2\nThe key observation\nEvery path in a tree has a single highest node, the point where it turns. Call it the turning point.\nturning point\n*\n/ \\\ngoes / \\ goes\ndown / \\ down\nL R\nOnce you fix the turning point, the best possible path through it is forced: go as deep as possible into\nthe left subtree, and as deep as possible into the right subtree.\nSo, if h(x) is the height of the subtree rooted at x measured in nodes (so h(NULL) = 0 ), then\nbest path turning at node = h(node.left) + h(node.right) [in edges]\nWhy does that come out in edges? Going down h(left) nodes from node uses exactly h(left) edges,\nbecause the first edge takes you from node into the left subtree. Same on the right. Add them.\nAnd then:\ndiameter of tree = maximum over all nodes of ( h(left) + h(right) )\nEvery path is counted exactly once, at its own turning point. Nothing is missed and nothing is double\ncounted.\nBrute force, and why it is slow\nTranslate the formula directly:"
+        }
+      ],
+      "tokens_streamed": 70,
+      "char_count": 335,
+      "ttft_sec": 17.026,
+      "total_sec": 18.669,
+      "server_metrics": {
+        "retrieval_ms": 101.2,
+        "ttft_ms": 16912.4,
+        "generation_ms": 18554.6,
+        "total_ms": 18658.5,
+        "token_count": 70,
+        "tokens_per_sec": 3.8
+      },
+      "used_labels": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5"
+      ],
+      "invalid_labels": [],
+      "citations_found": [
+        "[S1]",
+        "[S2]",
+        "[S3]",
+        "[S4]",
+        "[S5]"
+      ],
+      "answer": "The provided documents do not contain information regarding Dijkstra's algorithm or how it finds the shortest path in a weighted graph. The retrieved passages focus exclusively on properties and calculations related to Binary Trees, such as determining minimum depth and calculating the diameter of a tree [S1], [S2], [S3], [S4], [S5].",
+      "id": "Q5_absent_concept",
+      "category": "Groundedness / Anti-Hallucination"
+    }
+  ]
+}

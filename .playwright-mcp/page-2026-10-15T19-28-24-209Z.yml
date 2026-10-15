@@ -1,0 +1,97 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Proofline AI
+      - generic [ref=e12]: Local
+    - button "New Chat" [ref=e14] [cursor=pointer]
+    - navigation [ref=e17]:
+      - button "Ask Documents" [ref=e18] [cursor=pointer]
+      - button "Document Library 16" [ref=e121] [cursor=pointer]:
+        - generic [ref=e24]: Document Library
+        - generic [ref=e28]: "16"
+    - generic [ref=e29]: Recent Conversations
+    - generic [ref=e123]:
+      - generic [ref=e124]: Explain bottom-up thinking in binary...
+      - button "Delete chat" [ref=e125] [cursor=pointer]
+    - generic [ref=e33]:
+      - generic [ref=e34]: Local AI Ready
+      - generic [ref=e41]:
+        - generic [ref=e42]: gemma4:e2b
+        - generic [ref=e46]: 226 chunks
+  - main [ref=e51]:
+    - generic [ref=e52]:
+      - generic [ref=e53]: Explain bottom-up thinking in binary...
+      - generic [ref=e58]:
+        - button "New Chat" [ref=e129] [cursor=pointer]
+        - button "Library (16)" [ref=e122] [cursor=pointer]
+    - generic [ref=e64]:
+      - generic [ref=e132]:
+        - generic [ref=e133]: Explain bottom-up thinking in binary trees and why it is useful.
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - generic [ref=e139]: Proofline AI
+            - 'generic "Retrieval: 1608.5ms | TTFT: 14134.8ms | Gen: 17511.9ms" [ref=e191]':
+              - generic [ref=e194]: "TTFT: 14.13s"
+              - generic [ref=e195]: •
+              - generic [ref=e196]: 19.1s total
+              - generic [ref=e197]: •
+              - generic [ref=e198]: 8.7 tok/s
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - paragraph [ref=e199]:
+                - text: Bottom-up thinking involves returning information upward instead of recomputing it
+                - button "[S3]" [ref=e233] [cursor=pointer]
+                - text: . This means solving the left subtree, solving the right subtree, combining the results, and handing the result to the parent node
+                - button "[S3]" [ref=e234] [cursor=pointer]
+                - text: . This is defined as "bottom-up tree DP" and is the postorder position from Part 2 used deliberately
+                - button "[S3]" [ref=e235] [cursor=pointer]
+                - text: .
+              - paragraph [ref=e203]:
+                - text: The utility of this approach is that it helps avoid O(N²) complexity
+                - button "[S2]" [ref=e236] [cursor=pointer]
+                - text: . For example, the naive approach to finding the the height of a subtree involves a full walk, which is inefficient
+                - button "[S3]" [ref=e237] [cursor=pointer]
+                - text: . By returning information upward, you can solve problems such as diameter, balanced binary trees, maximum path sum, and largest BST subtree with the same set of operations
+                - button "[S3]" [ref=e238] [cursor=pointer]
+                - text: .
+            - generic [ref=e152]:
+              - button "Retrieved Evidence (3 sources) Collapse" [active] [ref=e239] [cursor=pointer]:
+                - generic [ref=e154]: Retrieved Evidence (3 sources)
+                - generic [ref=e159]: Collapse
+              - generic [ref=e242]:
+                - generic [ref=e243]:
+                  - generic [ref=e244]:
+                    - generic [ref=e245]:
+                      - generic [ref=e246]: "[S1]"
+                      - generic "14-Practice-Problems.pdf" [ref=e247]
+                      - generic [ref=e248]: Page 2
+                    - button "View Source" [ref=e249] [cursor=pointer]
+                  - generic [ref=e255]: "\"bottom-up with a sentinel. Think: what is the cost of the naive version, and what single value can carry both height and failure? • Diameter of Binary Tree (Easy). https://leetcode.com/problems/diameter-of-binary-tree/ Pattern: bottom-up, record versus return. Think: which expression is recorded and which is returned? • Merge Two Binary Trees (Easy). https://leetcode.com/problems/merge-two-binary-trees/ Pattern: two-tree recursion. Think: what should happen when one of the two nodes is NULL? • Binary Tree Paths (Easy). https://leetcode.com/problems/binary-tree-paths/ Pattern: backtrack- ing. Think: what must be undone when leaving a node? • Average of Levels in Binary Tree (Easy). https://leetcode.com/problems/average-of-levels-in- binary-tree/ Pattern: BFS template. Think: which type do you accumulate in, and why not int? Level 3: Easy plus Each of these needs two ideas at once, or an idea used slightly out of its comfort zone.\""
+                - generic [ref=e256]:
+                  - generic [ref=e257]:
+                    - generic [ref=e258]:
+                      - generic [ref=e259]: "[S2]"
+                      - generic "00-Index-and-How-To-Use.pdf" [ref=e260]
+                      - generic [ref=e261]: Page 2
+                    - button "View Source" [ref=e262] [cursor=pointer]
+                  - generic [ref=e268]: "\"Binary Trees and Tree Data Structures 2 Part Topic What it gives you 6 Bottom-Up Thinking returning information upward, avoiding O(Nˆ2) 7 Diameter the classic bottom-up problem 8 Balanced Binary Tree the sentinel value pattern 9 Path Problems root to leaf, backtracking, maximum path sum 10 Core LeetCode Patterns invert, subtree, LCA, construction, serialization, BST 11 Tree Views horizontal distance, top, bottom, vertical, boundary 12 Morris Traversal inorder in O(1) extra space 13 How to Think About Tree Problems the pattern recognition checklist 14 Practice Problem Sets graded problems with hints, no solutions 15 Revision Sheet every template on a few pages Read them in order. Parts 5, 6 and 7 are the spine of the whole course. If you are short of time, never skip those. The tree used throughout Every part uses the same example tree so that you build familiarity with one shape instead of re-reading a new diagram every page. 1 / \\ 2 3 / \\ \\ 4 5 6 preorder : 1 2 4 5 3 6\""
+                - generic [ref=e269]:
+                  - generic [ref=e270]:
+                    - generic [ref=e271]:
+                      - generic [ref=e272]: "[S3]"
+                      - generic "06-Bottom-Up-Thinking.pdf" [ref=e273]
+                      - generic [ref=e274]: Page 1
+                    - button "View Source" [ref=e275] [cursor=pointer]
+                  - generic [ref=e281]: "\"Part 6: Bottom-Up Thinking Returning information upward instead of recomputing it The idea in one line Solve the left subtree, solve the right subtree, combine, and hand the result to your parent. That is all “bottom-up tree DP” means. It is the postorder position from Part 2 used deliberately . Once you can design what to return, you can solve diameter, balanced tree, maximum path sum, largest BST subtree, and most Medium tree problems with the same six lines. solve(node) L = solve(node.left) R = solve(node.right) combine L, R and node return the result upward Where the naive approach goes wrong Here is a concrete, honest example. Suppose we want, for every node, the height of the subtree rooted at that node. The direct approach: int height(TreeNode* root) { if (root == NULL) return 0; return 1 + max(height(root->left), height(root->right)); } void printAllHeights(TreeNode* root) { if (root == NULL) return; cout << root->val << \" has height \" << height(root) << \"\\n\"; // full walk\""
+            - generic [ref=e164] [cursor=pointer]:
+              - generic [ref=e165]:
+                - generic [ref=e169]: Automated Evidence Audit
+                - generic [ref=e228]: (2 citations verified)
+              - generic [ref=e229]: Inspect audit
+      - generic [ref=e175]:
+        - textbox "Ask a follow-up question..." [ref=e176]
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - button "Attach PDF" [ref=e179] [cursor=pointer]
+            - generic [ref=e183]: 16 PDFs Indexed
+          - button "Send question (Enter)" [disabled] [ref=e207]
